@@ -4,6 +4,8 @@ use std::env::args;
 use std::ffi::{c_void, CStr, CString};
 use std::os::raw::{c_char, c_int, c_uchar, c_uint, c_ulong};
 use std::ptr::{null, null_mut, slice_from_raw_parts};
+use std::thread::{sleep, yield_now};
+use std::time::Duration;
 use x11::xlib;
 use serde::{Serialize, Deserialize};
 
@@ -171,6 +173,7 @@ fn setup_event_loop<F>(window_name: &str, callback: F) -> !
           }
         }
       }
+      sleep(Duration::from_millis(10));
     }
   }
 }
